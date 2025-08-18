@@ -11,7 +11,11 @@ class RoomComparer1 {
 
     for (var category in categories) {
       for (var room in category.storageRooms) {
-        allContainers.addAll(room.containers);
+        if (room.containers != null) {
+          allContainers.addAll(room.containers!);
+        } else {
+          print("room.containers==null");
+        }
       }
     }
 

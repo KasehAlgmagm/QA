@@ -8,7 +8,7 @@ import 'package:flutter_application_6/prodact/ProductContainerScreen.dart'
 import 'package:flutter_application_6/storageRoom/StorageRoomScreen1.dart';
 
 class ContainerScreen extends StatefulWidget {
-  final Category category; // تمرير كائن القسم
+  final Category? category; // تمرير كائن القسم
 
   final StorageRoom room;
   final List<ContainerItem> containers;
@@ -16,7 +16,7 @@ class ContainerScreen extends StatefulWidget {
   ContainerScreen({
     required this.room,
     required this.containers,
-    required this.category,
+    this.category,
   });
 
   @override
@@ -60,8 +60,11 @@ class _ContainerScreenState extends State<ContainerScreen> {
       }
 
       // إضافة الكونتينرات إلى الغرفة المحددة
-
-      selectedRoom!.containers.addAll(selectedContainers);
+      if (selectedRoom!.containers != null) {
+        selectedRoom!.containers!.addAll(selectedContainers);
+      } else {
+        print("object");
+      }
 
       if (RoomManager().mainRooms.isNotEmpty) {
         final mainRoom = RoomManager().mainRooms.firstWhere(
@@ -75,11 +78,15 @@ class _ContainerScreenState extends State<ContainerScreen> {
                 containers: [],
               ), // Throw an exception
         );
-
-        mainRoom.containers.removeWhere(
-          (container) =>
-              selectedContainers.any((selected) => selected.id == container.id),
-        );
+        if (mainRoom.containers != null) {
+          mainRoom.containers!.removeWhere(
+            (container) => selectedContainers.any(
+              (selected) => selected.id == container.id,
+            ),
+          );
+        } else {
+          print(" mainRoom.containers==null");
+        }
 
         // حذف الكونتينرات من القائمة في الشاشة الحالية
         widget.containers.removeWhere(
@@ -219,7 +226,8 @@ class _ContainerScreenState extends State<ContainerScreen> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    RoomComparer roomComparer = RoomComparer(widget.category);
+                    RoomComparer roomComparer = RoomComparer(widget.category!);
+
                     List<StorageRoom> allRooms = roomComparer
                         .getRoomsInSameCategory(widget.room);
                     print(allRooms.length); // طباعة عدد الغرف
