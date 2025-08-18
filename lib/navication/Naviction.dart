@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_6/Category/Category.dart';
-import 'package:flutter_application_6/Category/Category1.dart';
 import 'package:flutter_application_6/Category/Category2.dart';
 import 'package:flutter_application_6/Container/Container.dart';
 import 'package:flutter_application_6/Container/Container1.dart';
-import 'package:flutter_application_6/my_widget/RoomComparer1.dart';
 import 'package:flutter_application_6/navication/NotifactionModl.dart';
 import 'package:flutter_application_6/prodact/prodact.dart';
 //import 'package:flutter_application_6/storageRoom/StorageRoomScreen%20.dart';
 import 'package:flutter_application_6/storageRoom/StorageRoomScreen1.dart';
 
 class NotificationList extends StatefulWidget {
+  const NotificationList({super.key});
+
   @override
   _NotificationListState createState() => _NotificationListState();
 
@@ -149,6 +149,10 @@ class _NotificationListState extends State<NotificationList> {
         // يمكنك حذف الإشعار إذا كان ذلك مطلوبًا
         // notifications.removeAt(index);
       });
+      print("hello");
+      setState(() {
+        notifications.removeAt(index); // حذف الرسالة من القائمة
+      });
     }
   }
 
@@ -166,8 +170,8 @@ class _NotificationListState extends State<NotificationList> {
       itemBuilder: (context, index) {
         final notification = notifications[index];
         return Container(
-          margin: EdgeInsets.all(8.0),
-          padding: EdgeInsets.all(16.0),
+          margin: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           decoration: BoxDecoration(
             color: Colors.white,
             border: Border.all(
@@ -180,7 +184,7 @@ class _NotificationListState extends State<NotificationList> {
             children: [
               Text(
                 notification.message,
-                style: TextStyle(fontSize: 20, color: Colors.black),
+                style: const TextStyle(fontSize: 20, color: Colors.black),
               ),
               if (notification.type == "NST" &&
                   notification.storageRoom != null)
@@ -189,17 +193,20 @@ class _NotificationListState extends State<NotificationList> {
                   children: [
                     Text(
                       "غرفة التخزين: ${notification.storageRoom!.name}",
-                      style: TextStyle(fontSize: 16, color: Colors.black),
+                      style: const TextStyle(fontSize: 16, color: Colors.black),
                     ),
                     Text.rich(
                       TextSpan(
                         text: "temperature: ",
-                        style: TextStyle(fontSize: 16, color: Colors.black),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                        ),
                         children: [
                           TextSpan(
                             text:
                                 "${notification.storageRoom?.temperature ?? 'غير متوفر'}°C",
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               color: Colors.red,
                             ), // اللون الأحمر
@@ -210,12 +217,15 @@ class _NotificationListState extends State<NotificationList> {
                     Text.rich(
                       TextSpan(
                         text: "Degree of humidity: ",
-                        style: TextStyle(fontSize: 16, color: Colors.black),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                        ),
                         children: [
                           TextSpan(
                             text:
                                 "${notification.storageRoom?.humidity ?? 'غير متوفر'}%",
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               color: Colors.red,
                             ), // اللون الأحمر
@@ -229,7 +239,7 @@ class _NotificationListState extends State<NotificationList> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "مجموعة الكونتينرات:",
                       style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
@@ -239,7 +249,10 @@ class _NotificationListState extends State<NotificationList> {
                         children: [
                           Text(
                             "ID: ${container.id}, نوع: ${container.type}",
-                            style: TextStyle(fontSize: 16, color: Colors.grey),
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.grey,
+                            ),
                           ),
                         ],
                       ),
@@ -250,11 +263,11 @@ class _NotificationListState extends State<NotificationList> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   IconButton(
-                    icon: Icon(Icons.check, color: Colors.greenAccent),
+                    icon: const Icon(Icons.check, color: Colors.greenAccent),
                     onPressed: () => _acceptNotification(index),
                   ),
                   IconButton(
-                    icon: Icon(Icons.close, color: Colors.red),
+                    icon: const Icon(Icons.close, color: Colors.red),
 
                     onPressed: () => _rejectNotification(index),
                   ),
