@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_6/Category/Category.dart';
 import 'package:flutter_application_6/Category/Category1.dart';
 import 'package:flutter_application_6/Container/Container.dart';
+import 'package:flutter_application_6/Logine.dart';
+import 'package:flutter_application_6/apis/log_out_user.dart';
 import 'package:flutter_application_6/my_widget/RoomManager.dart';
 import 'package:flutter_application_6/prodact/prodact.dart';
 import 'package:flutter_application_6/storageRoom/StorageRoomScreen1.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+Future<String?> _getValue({required String key}) async {
+  final prefs = await SharedPreferences.getInstance();
+  return prefs.getString(key);
+}
 
 class Category2 extends StatefulWidget {
   static final List<Category> categories = [
@@ -86,11 +94,19 @@ class Category2 extends StatefulWidget {
     ),
     // يمكنك إضافة أقسام أخرى هنا
   ];
+
+  const Category2({super.key});
   @override
   _Category2State createState() => _Category2State();
 }
 
 class _Category2State extends State<Category2> {
+  LogOutUser logOut = LogOutUser();
+  Future<void> _saveValue({required String key, required String value}) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(key, value);
+  }
+
   List<StorageRoom> mainRooms = [];
   @override
   void initState() {
@@ -111,8 +127,46 @@ class _Category2State extends State<Category2> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        drawer: Drawer(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              MaterialButton(
+                onPressed: () async {
+                  logOut.logOutUser();
+                  await _saveValue(key: 'token', value: '');
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('تم تسجيل الخروج بنجاح')),
+                  );
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LogIn()),
+                    (route) => false,
+                  );
+                },
+                child: const Text('تسجيل الخروج'),
+              ),
+              MaterialButton(
+                onPressed: () async {
+                  //api test
+
+                  // ShowContainersOnStorageElement s =
+                  //     ShowContainersOnStorageElement();
+                  // await s.showContainersOnStorageElementMethod(
+                  //   storageElementId: 1,
+                  // );
+
+                  // print(
+                  //   'objecttttttttttt=${ShowContainersOnStorageElementData.showContainersOnStorageElementMap}',
+                  // );
+                },
+                child: const Text('click me'),
+              ),
+            ],
+          ),
+        ),
         appBar: AppBar(
-          title: Text('عرض الأقسام'),
+          title: const Text('عرض الأقسام'),
           backgroundColor: Colors.lightBlue,
         ),
 

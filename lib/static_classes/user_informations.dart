@@ -1,5 +1,3 @@
-import 'dart:io';
-
 class UserInformations {
   // static String? userName;
   //static String? lastName;
