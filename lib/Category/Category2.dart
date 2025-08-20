@@ -109,19 +109,24 @@ class _Category2State extends State<Category2> {
     await prefs.setString(key, value);
   }
 
+  late RoomManager roomManager;
   List<StorageRoom> mainRooms = [];
   @override
   void initState() {
     super.initState();
+    roomManager = RoomManager(); // إنشاء كائن RoomManager
+
     populateMainRooms(); // تأكد من أن هذه السطر موجود
+
+    print("Main rooms populated1: ${roomManager.mainRooms.length}");
   }
 
   void populateMainRooms() {
     for (var category in Category2.categories) {
-      RoomManager().mainRooms.addAll(category.storageRooms);
+      roomManager.mainRooms.addAll(category.storageRooms);
     }
     print(
-      "Main rooms populated: ${RoomManager().mainRooms.length}",
+      "Main rooms populated: ${roomManager.mainRooms.length}",
     ); // طباعة عدد الغرف
   }
 

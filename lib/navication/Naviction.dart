@@ -3,6 +3,7 @@ import 'package:flutter_application_6/Category/Category.dart';
 import 'package:flutter_application_6/Category/Category2.dart';
 import 'package:flutter_application_6/Container/Container.dart';
 import 'package:flutter_application_6/Container/Container1.dart';
+import 'package:flutter_application_6/my_widget/RoomManager.dart';
 import 'package:flutter_application_6/navication/NotifactionModl.dart';
 import 'package:flutter_application_6/prodact/prodact.dart';
 //import 'package:flutter_application_6/storageRoom/StorageRoomScreen%20.dart';
@@ -24,41 +25,11 @@ List<NotificationModel> notifications = [
     storageRoom: StorageRoom(
       id: '1',
       name: "غرفة 1",
-      temperature: 22.5,
+      // temperature: 22.5,
       humidity: 45.0,
-      containers: [
-        ContainerItem(
-          id: "C1",
-          type: "نوع A",
-          products: [
-            Product(name: "منتج 1", quantity: 10),
-            Product(name: "منتج 2", quantity: 5),
-          ],
-        ),
-        ContainerItem(
-          id: "C2",
-          type: "نوع B",
-          products: [Product(name: "منتج 3", quantity: 8)],
-        ),
-      ],
     ),
   ),
-  NotificationModel(
-    message: "رسالة 2",
-    type: "NDC",
-    containers: [
-      ContainerItem(
-        id: "كونتينر 3",
-        type: "نوع 3",
-        products: [Product(name: "منتج E", quantity: 4)],
-      ),
-      ContainerItem(
-        id: "كونتينر 4",
-        type: "نوع 4",
-        products: [Product(name: "منتج F", quantity: 6)],
-      ),
-    ],
-  ),
+  NotificationModel(message: "رسالة 2", type: "NDC"),
 ];
 int getNotificationCount() {
   return notifications.length; // إرجاع عدد الإشعارات
@@ -72,17 +43,22 @@ class _NotificationListState extends State<NotificationList> {
     final notification = notifications[index];
 
     if (notification.type == "NST" && notification.storageRoom != null) {
+      //Category2 category2 = Category2();
+      final roomManager = RoomManager(); // الحصول على كائن Singleton
+      // Category2 category2 = Category2();
       final room = notification.storageRoom!;
+      final roomId = notification.storageRoom!.id;
       final containersT = room.containers;
 
+      final originalRoom = roomManager.getRoomById(roomId);
       // الحصول على الكونتينرات الخاصة بالغرفة
       print("Notification room ID: ${room.id}");
       print("Notification room name: ${room.name}");
-      print("Containers in room: ${containersT.length}");
+      print("roompasseresr:${RoomManager().mainRooms.length}");
 
       // تحديد الفئة المناسبة
-      final category = categories.firstWhere(
-        (cat) => cat.storageRooms.any((r) => r.id == room.id),
+      /* final category = categories.firstWhere(
+        (cat) => cat.storageRooms.any((r) => r.id == originalRoom.id),
         orElse:
             () =>
                 throw Exception(
@@ -94,41 +70,51 @@ class _NotificationListState extends State<NotificationList> {
 
       print(
         "Rooms in category: ${category.storageRooms.map((r) => r.name).toList()}",
-      );
+      );*/
 
       // توجيه المستخدم إلى شاشة ContainerScreen مباشرة
+
       Navigator.push(
         context,
         MaterialPageRoute(
           builder:
               (context) => ContainerScreen(
-                category: category,
-                room: room,
-                containers: containersT,
+                room: originalRoom,
+                containers: originalRoom.containers!,
               ),
         ),
       );
 
       setState(() {
         notifications[index].isAccepted = true;
+        populateMainRooms();
+        notifications.removeAt(index); // حذف الرسالة من القائمة
+        // تأكد من أن هذه السطر موجود
       });
 
       print("hello");
-      setState(() {
-        notifications.removeAt(index); // حذف الرسالة من القائمة
-      });
     } else if (notification.type == "NDC") {
+      List<ContainerItem> containers1 = [
+        ContainerItem(
+          id: "كونتينر 3",
+          type: "نوع 3",
+          products: [Product(name: "منتج E", quantity: 4)],
+        ),
+        ContainerItem(
+          id: "كونتينر 4",
+          type: "نوع 4",
+          products: [Product(name: "منتج F", quantity: 6)],
+        ),
+      ];
       // عند تلقي إشعار من نوع NDC، إنشاء غرفة افتراضية
-      List<ContainerItem> allContainers =
-          notification.containers ?? []; // اجمع الكونتينرات من الإشعار
-
+      // اجمع الكونتينرات من الإشعار
       // إنشاء غرفة افتراضية
       StorageRoom virtualRoom = StorageRoom(
         id: 'virtual_room', // معرف الغرفة الافتراضية
         name: 'شاحنات النقل',
         temperature: 20.0, // يمكنك وضع قيمة افتراضية
         humidity: 50.0, // يمكنك وضع قيمة افتراضية
-        containers: allContainers,
+        // containers: allContainers,
       );
 
       // توجيه المستخدم إلى شاشة ContainerScreen مع الغرفة الافتراضية
@@ -139,7 +125,7 @@ class _NotificationListState extends State<NotificationList> {
               (context) => ContainerScreen(
                 category: categories.first, // استخدم أي فئة مناسبة
                 room: virtualRoom,
-                containers: allContainers, // تمرير جميع الكونتينرات
+                containers: containers1, // تمرير جميع الكونتينرات
               ),
         ),
       );
@@ -278,5 +264,13 @@ class _NotificationListState extends State<NotificationList> {
         );
       },
     );
+  }
+
+  void populateMainRooms() {
+    final roomManager = RoomManager(); // الحصول على كائن Singleton
+    // إضافة غرف من جميع الفئات إلى mainRooms
+    for (var category in Category2.categories) {
+      roomManager.mainRooms.addAll(category.storageRooms);
+    }
   }
 }
