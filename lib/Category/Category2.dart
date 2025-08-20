@@ -4,8 +4,10 @@ import 'package:flutter_application_6/Category/Category1.dart';
 import 'package:flutter_application_6/Container/Container.dart';
 import 'package:flutter_application_6/Logine.dart';
 import 'package:flutter_application_6/apis/log_out_user.dart';
+import 'package:flutter_application_6/apis/show_containers_on_storage_element.dart';
 import 'package:flutter_application_6/my_widget/RoomManager.dart';
 import 'package:flutter_application_6/prodact/prodact.dart';
+import 'package:flutter_application_6/static_classes/show_containers_on_storage_element_data.dart';
 import 'package:flutter_application_6/storageRoom/StorageRoomScreen1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -150,15 +152,15 @@ class _Category2State extends State<Category2> {
                 onPressed: () async {
                   //api test
 
-                  // ShowContainersOnStorageElement s =
-                  //     ShowContainersOnStorageElement();
-                  // await s.showContainersOnStorageElementMethod(
-                  //   storageElementId: 1,
-                  // );
+                  ShowContainersOnStorageElement s =
+                      ShowContainersOnStorageElement();
+                  await s.showContainersOnStorageElementMethod(
+                    storageElementId: 1,
+                  );
 
-                  // print(
-                  //   'objecttttttttttt=${ShowContainersOnStorageElementData.showContainersOnStorageElementMap}',
-                  // );
+                  print(
+                    'objecttttttttttt=${ShowContainersOnStorageElementData.showContainersOnStorageElementMap}',
+                  );
                 },
                 child: const Text('click me'),
               ),
