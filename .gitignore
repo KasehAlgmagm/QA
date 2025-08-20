@@ -113,4 +113,5 @@ app.*.map.json
 /linux/flutter/ephemeral/
 /linux/build/
 
-/pubspec.lock
+/android
+/macos
