@@ -1,0 +1,15 @@
+enum FilterEnum {
+  Import_op_container,
+  Import_op_storage_md,
+  Import_operation_product,
+  Posetions_on_section,
+  Positions_on_sto_m,
+  Section,
+  Transfer,
+  Transfer_detail,
+  Vehicle,
+  Violation,
+  container_movments,
+  reject_details,
+  reserved_detailss,
+}
