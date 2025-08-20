@@ -1,3 +1,47 @@
+# # Miscellaneous
+# *.class
+# *.log
+# *.pyc
+# *.swp
+# .DS_Store
+# .atom/
+# .buildlog/
+# .history
+# .svn/
+# migrate_working_dir/
+
+# # IntelliJ related
+# *.iml
+# *.ipr
+# *.iws
+# .idea/
+
+# # The .vscode folder contains launch configuration and tasks you configure in
+# # VS Code which you may wish to be included in version control, so this line
+# # is commented out by default.
+# #.vscode/
+
+# # Flutter/Dart/Pub related
+# **/doc/api/
+# **/ios/Flutter/.last_build_id
+# .dart_tool/
+# .flutter-plugins
+# .flutter-plugins-dependencies
+# .pub-cache/
+# .pub/
+# /build/
+
+# # Symbolication related
+# app.*.symbols
+
+# # Obfuscation related
+# app.*.map.json
+
+# # Android Studio will place build artifacts here
+# /android/app/debug
+# /android/app/profile
+# /android/app/release
+# /android
 # Miscellaneous
 *.class
 *.log
@@ -16,10 +60,8 @@ migrate_working_dir/
 *.iws
 .idea/
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
+# VS Code related (keep this ignored if configs are personal)
+.vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/
@@ -37,7 +79,39 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+# Android build & intermediate files
+/android/.gradle/
+/android/captures/
+/android/app/build/
+/android/app/.cxx/
+/android/local.properties
+/android/gradle/
+/android/gradlew
+/android/gradlew.bat
+/android/gradle-wrapper.jar
+/android/gradle-wrapper.properties
+
+# iOS/macOS build & dependency files
+/ios/Flutter/Flutter.framework
+/ios/Flutter/Flutter.podspec
+/ios/Flutter/Generated.xcconfig
+/ios/Flutter/ephemeral/
+/ios/Pods/
+/ios/build/
+/ios/.symlinks/
+/ios/Runner/GeneratedPluginRegistrant.*
+/macos/Flutter/GeneratedPluginRegistrant.swift
+/macos/Pods/
+/macos/build/
+/macos/Flutter/ephemeral/
+
+# Windows
+/windows/flutter/ephemeral/
+/windows/build/
+
+# Linux
+/linux/flutter/ephemeral/
+/linux/build/
+
+/android
+/macos
