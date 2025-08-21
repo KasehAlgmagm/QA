@@ -30,12 +30,14 @@ class Readnotifications {
       );
       Map<dynamic, dynamic> data = json.decode(response.body);
       if (response.statusCode == 202 || response.statusCode == 201) {
+        ReadnotificationsData.readnotificationsMap = {};
         ReadnotificationsData.readnotificationsMap.addAll(data);
         print('Readnotifications sent successfully:${response.body}');
       } else {
         print(
           'Failed to sent Readnotifications Status code: ${response.statusCode}',
         );
+        ReadnotificationsData.readnotificationsMap = {};
         ReadnotificationsData.readnotificationsMap.addAll(data);
         print('Response body: ${response.body}');
       }

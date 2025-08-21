@@ -31,10 +31,12 @@ class PassLoad {
       );
       Map<dynamic, dynamic> data = json.decode(response.body);
       if (response.statusCode == 202 || response.statusCode == 201) {
+        PassLoadData.passLoadMap = {};
         PassLoadData.passLoadMap.addAll(data);
         print('PassLoad sent successfully:${response.body}');
       } else {
         print('Failed to sent PassLoad Status code: ${response.statusCode}');
+        PassLoadData.passLoadMap = {};
         PassLoadData.passLoadMap.addAll(data);
         print('Response body: ${response.body}');
       }

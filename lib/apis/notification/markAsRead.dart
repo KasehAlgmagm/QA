@@ -30,10 +30,12 @@ class Markasread {
       );
       Map<dynamic, dynamic> data = json.decode(response.body);
       if (response.statusCode == 202 || response.statusCode == 201) {
+        MarkasreadData.markasreadMap = {};
         MarkasreadData.markasreadMap.addAll(data);
         print('Markasread sent successfully:${response.body}');
       } else {
         print('Failed to sent Markasread Status code: ${response.statusCode}');
+        MarkasreadData.markasreadMap = {};
         MarkasreadData.markasreadMap.addAll(data);
         print('Response body: ${response.body}');
       }

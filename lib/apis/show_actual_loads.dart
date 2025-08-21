@@ -30,7 +30,7 @@ class ShowActualLoads {
       );
       Map<dynamic, dynamic> data = json.decode(response.body);
       if (response.statusCode == 202 || response.statusCode == 201) {
-        Map<dynamic, dynamic> data = json.decode(response.body);
+        ShowActualLoadsData.showActualLoadsMap = {};
 
         ShowActualLoadsData.showActualLoadsMap.addAll(data);
         print('ShowActualLoads sent successfully:${response.body}');
@@ -38,6 +38,7 @@ class ShowActualLoads {
         print(
           'Failed to sent ShowActualLoads Status code: ${response.statusCode}',
         );
+        ShowActualLoadsData.showActualLoadsMap = {};
         ShowActualLoadsData.showActualLoadsMap.addAll(data);
         print('Response body: ${response.body}');
       }

@@ -32,6 +32,7 @@ class ShowContainerMovements {
       );
       Map<dynamic, dynamic> data = json.decode(response.body);
       if (response.statusCode == 202 || response.statusCode == 201) {
+        ShowContainerMovementsData.showContainerMovementsMap = {};
         ShowContainerMovementsData.showContainerMovementsMap.addAll(data);
 
         print('ShowContainerMovements sent successfully:${response.body}');
@@ -39,6 +40,7 @@ class ShowContainerMovements {
         print(
           'Failed to sent ShowContainerMovements Status code: ${response.statusCode}',
         );
+        ShowContainerMovementsData.showContainerMovementsMap = {};
         ShowContainerMovementsData.showContainerMovementsMap.addAll(data);
         print('Response body: ${response.body}');
       }

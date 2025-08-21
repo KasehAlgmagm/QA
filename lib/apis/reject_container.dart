@@ -37,12 +37,14 @@ class RejectContainer {
       );
       Map<dynamic, dynamic> data = json.decode(response.body);
       if (response.statusCode == 202 || response.statusCode == 201) {
+        RejectContainerData.rejectContainerMap = {};
         RejectContainerData.rejectContainerMap.addAll(data);
         print('RejectContainer sent successfully:${response.body}');
       } else {
         print(
           'Failed to sent RejectContainer Status code: ${response.statusCode}',
         );
+        RejectContainerData.rejectContainerMap = {};
         RejectContainerData.rejectContainerMap.addAll(data);
         print('Response body: ${response.body}');
       }

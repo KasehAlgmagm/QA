@@ -35,6 +35,8 @@ class ShowEmptyPostionsOnStorageElement {
       Map<dynamic, dynamic> data = json.decode(response.body);
       if (response.statusCode == 202 || response.statusCode == 201) {
         ShowEmptyPostionsOnStorageElementData
+            .showEmptyPostionsOnStorageElementMap = {};
+        ShowEmptyPostionsOnStorageElementData
             .showEmptyPostionsOnStorageElementMap
             .addAll(data);
 
@@ -45,6 +47,8 @@ class ShowEmptyPostionsOnStorageElement {
         print(
           'Failed to sent ShowEmptyPostionsOnStorageElement Status code: ${response.statusCode}',
         );
+        ShowEmptyPostionsOnStorageElementData
+            .showEmptyPostionsOnStorageElementMap = {};
         ShowEmptyPostionsOnStorageElementData
             .showEmptyPostionsOnStorageElementMap
             .addAll(data);

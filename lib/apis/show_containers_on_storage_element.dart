@@ -34,6 +34,8 @@ class ShowContainersOnStorageElement {
       );
       Map<dynamic, dynamic> data = json.decode(response.body);
       if (response.statusCode == 202 || response.statusCode == 201) {
+        ShowContainersOnStorageElementData.showContainersOnStorageElementMap =
+            {};
         ShowContainersOnStorageElementData.showContainersOnStorageElementMap
             .addAll(data);
 
@@ -44,6 +46,8 @@ class ShowContainersOnStorageElement {
         print(
           'Failed to sent ShowContainersOnStorageElement Status code: ${response.statusCode}',
         );
+        ShowContainersOnStorageElementData.showContainersOnStorageElementMap =
+            {};
         ShowContainersOnStorageElementData.showContainersOnStorageElementMap
             .addAll(data);
         print('Response body: ${response.body}');

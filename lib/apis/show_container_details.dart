@@ -23,7 +23,6 @@ class ShowContainerDetails {
     await _fetchData();
 
     try {
-      print('1');
       final response = await get(
         url,
         headers: {
@@ -31,12 +30,11 @@ class ShowContainerDetails {
           'Authorization': 'Bearer $_token',
         },
       );
-      print("Status code: ${response.statusCode}");
-      print("Response body: ${response.body}");
-      print('2');
+
       Map<dynamic, dynamic> data = json.decode(response.body);
-      print('3');
+
       if (response.statusCode == 202 || response.statusCode == 201) {
+        ShowContainerDetailsData.showContainerDetailsMap = {};
         ShowContainerDetailsData.showContainerDetailsMap.addAll(data);
 
         print('ShowContainerDetails sent successfully:${response.body}');
@@ -44,6 +42,7 @@ class ShowContainerDetails {
         print(
           'Failed to sent ShowContainerDetails Status code: ${response.statusCode}',
         );
+        ShowContainerDetailsData.showContainerDetailsMap = {};
         ShowContainerDetailsData.showContainerDetailsMap.addAll(data);
         print('Response body: ${response.body}');
       }

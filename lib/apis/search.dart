@@ -38,10 +38,12 @@ class Search {
       );
       Map<dynamic, dynamic> data = json.decode(response.body);
       if (response.statusCode == 202 || response.statusCode == 201) {
+        SearchData.searchMap = {};
         SearchData.searchMap.addAll(data);
         print('Search sent successfully:${response.body}');
       } else {
         print('Failed to sent Search Status code: ${response.statusCode}');
+        SearchData.searchMap = {};
         SearchData.searchMap.addAll(data);
         print('Response body: ${response.body}');
       }

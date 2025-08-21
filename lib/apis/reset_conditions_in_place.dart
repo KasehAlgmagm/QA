@@ -37,12 +37,14 @@ class ResetConditionsInPlace {
       );
       Map<dynamic, dynamic> data = json.decode(response.body);
       if (response.statusCode == 202 || response.statusCode == 201) {
+        ResetConditionsInPlaceData.resetConditionsInPlaceMap = {};
         ResetConditionsInPlaceData.resetConditionsInPlaceMap.addAll(data);
         print('ResetConditionsInPlace sent successfully:${response.body}');
       } else {
         print(
           'Failed to sent ResetConditionsInPlace Status code: ${response.statusCode}',
         );
+        ResetConditionsInPlaceData.resetConditionsInPlaceMap = {};
         ResetConditionsInPlaceData.resetConditionsInPlaceMap.addAll(data);
         print('Response body: ${response.body}');
       }

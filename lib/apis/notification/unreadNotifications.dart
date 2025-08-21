@@ -30,12 +30,14 @@ class Unreadnotifications {
       );
       Map<dynamic, dynamic> data = json.decode(response.body);
       if (response.statusCode == 202 || response.statusCode == 201) {
+        UnreadnotificationsData.unreadnotificationsMap = {};
         UnreadnotificationsData.unreadnotificationsMap.addAll(data);
         print('Unreadnotifications sent successfully:${response.body}');
       } else {
         print(
           'Failed to sent Unreadnotifications Status code: ${response.statusCode}',
         );
+        UnreadnotificationsData.unreadnotificationsMap = {};
         UnreadnotificationsData.unreadnotificationsMap.addAll(data);
         print('Response body: ${response.body}');
       }
