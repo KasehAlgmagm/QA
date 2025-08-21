@@ -30,6 +30,7 @@ class ShowLoadDetails {
       );
       Map<dynamic, dynamic> data = json.decode(response.body);
       if (response.statusCode == 202 || response.statusCode == 201) {
+        ShowLoadDetailsData.showLoadDetailsMap = {};
         ShowLoadDetailsData.showLoadDetailsMap.addAll(data);
 
         print('ShowLoadDetails sent successfully:${response.body}');
@@ -37,6 +38,7 @@ class ShowLoadDetails {
         print(
           'Failed to sent ShowLoadDetails Status code: ${response.statusCode}',
         );
+        ShowLoadDetailsData.showLoadDetailsMap = {};
         ShowLoadDetailsData.showLoadDetailsMap.addAll(data);
         print('Response body: ${response.body}');
       }

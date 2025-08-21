@@ -30,12 +30,14 @@ class Allnotifications {
       );
       Map<dynamic, dynamic> data = json.decode(response.body);
       if (response.statusCode == 202 || response.statusCode == 201) {
+        AllnotificationsData.allnotificationsMap = {};
         AllnotificationsData.allnotificationsMap.addAll(data);
         print('Allnotifications sent successfully:${response.body}');
       } else {
         print(
           'Failed to sent Allnotifications Status code: ${response.statusCode}',
         );
+        AllnotificationsData.allnotificationsMap = {};
         AllnotificationsData.allnotificationsMap.addAll(data);
         print('Response body: ${response.body}');
       }

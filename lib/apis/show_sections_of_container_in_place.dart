@@ -37,6 +37,8 @@ class ShowSectionsOfContainerInPlace {
       );
       Map<dynamic, dynamic> data = json.decode(response.body);
       if (response.statusCode == 202 || response.statusCode == 201) {
+        ShowSectionsOfContainerInPlaceData.showSectionsOfContainerInPlaceMap =
+            {};
         ShowSectionsOfContainerInPlaceData.showSectionsOfContainerInPlaceMap
             .addAll(data);
 
@@ -47,6 +49,8 @@ class ShowSectionsOfContainerInPlace {
         print(
           'Failed to sent ShowSectionsOfContainerInPlace Status code: ${response.statusCode}',
         );
+        ShowSectionsOfContainerInPlaceData.showSectionsOfContainerInPlaceMap =
+            {};
         ShowSectionsOfContainerInPlaceData.showSectionsOfContainerInPlaceMap
             .addAll(data);
         print('Response body: ${response.body}');

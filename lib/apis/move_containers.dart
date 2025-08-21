@@ -40,12 +40,14 @@ class MoveContainers {
       );
       Map<dynamic, dynamic> data = json.decode(response.body);
       if (response.statusCode == 202 || response.statusCode == 201) {
+        MoveContainersData.moveContainersMap = {};
         MoveContainersData.moveContainersMap.addAll(data);
         print('MoveContainers sent successfully:${response.body}');
       } else {
         print(
           'Failed to sent MoveContainers Status code: ${response.statusCode}',
         );
+        MoveContainersData.moveContainersMap = {};
         MoveContainersData.moveContainersMap.addAll(data);
         print('Response body: ${response.body}');
       }

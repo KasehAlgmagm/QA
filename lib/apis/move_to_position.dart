@@ -39,12 +39,14 @@ class MoveToPosition {
       );
       Map<dynamic, dynamic> data = json.decode(response.body);
       if (response.statusCode == 202 || response.statusCode == 201) {
+        MoveToPositionData.moveToPositionMap = {};
         MoveToPositionData.moveToPositionMap.addAll(data);
         print('MoveToPosition sent successfully:${response.body}');
       } else {
         print(
           'Failed to sent MoveToPosition Status code: ${response.statusCode}',
         );
+        MoveToPositionData.moveToPositionMap = {};
         MoveToPositionData.moveToPositionMap.addAll(data);
         print('Response body: ${response.body}');
       }

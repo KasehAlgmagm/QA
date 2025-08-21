@@ -34,6 +34,7 @@ class ShowStorageElementsOnSection {
       );
       Map<dynamic, dynamic> data = json.decode(response.body);
       if (response.statusCode == 202 || response.statusCode == 201) {
+        ShowStorageElementsOnSectionData.showStorageElementsOnSectionMap = {};
         ShowStorageElementsOnSectionData.showStorageElementsOnSectionMap.addAll(
           data,
         );
@@ -45,6 +46,7 @@ class ShowStorageElementsOnSection {
         print(
           'Failed to sent ShowStorageElementsOnSection Status code: ${response.statusCode}',
         );
+        ShowStorageElementsOnSectionData.showStorageElementsOnSectionMap = {};
         ShowStorageElementsOnSectionData.showStorageElementsOnSectionMap.addAll(
           data,
         );

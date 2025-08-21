@@ -37,6 +37,7 @@ class ShowSectionsOnPlace {
       );
       Map<dynamic, dynamic> data = json.decode(response.body);
       if (response.statusCode == 202 || response.statusCode == 201) {
+        ShowSectionsOnPlaceData.showSectionsOnPlaceMap = {};
         ShowSectionsOnPlaceData.showSectionsOnPlaceMap.addAll(data);
 
         print('ShowSectionsOnPlace sent successfully:${response.body}');
@@ -44,6 +45,7 @@ class ShowSectionsOnPlace {
         print(
           'Failed to sent ShowSectionsOnPlace Status code: ${response.statusCode}',
         );
+        ShowSectionsOnPlaceData.showSectionsOnPlaceMap = {};
         ShowSectionsOnPlaceData.showSectionsOnPlaceMap.addAll(data);
         print('Response body: ${response.body}');
       }
