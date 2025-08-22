@@ -19,6 +19,7 @@ class CategoryList extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
+                
                 builder: (context) => StorageRoomScreen(category: category),
               ),
             );
